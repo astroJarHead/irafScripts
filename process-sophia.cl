@@ -33,6 +33,45 @@ else
    ccdred
 print "\n"
 
+# Make sure that the CCD used was indeed the PI Sophia CCD
+
+# Extract the instrument used from the header, store to a 
+# file called instrument.txt
+
+hedit ("g??d???.???.fits",
+"INSTRUME", ".", add=no, addonly=no, delete=no, verify=no, show=yes,
+update=no, > "instrument.txt")
+
+# Call the Shell script that uses the tried and true ed editor
+# to replace the '=' in the hedit output with a comma so that 
+# the built-in IRAF function fscan can read the strings. 
+# Note that the cl needs the '!' to escape the call to the shell.
+!../removeEquals.sh
+
+list = "instrument.txt"
+
+scan (list, s1, s2)
+
+# Test if we have the Sophia camera
+
+print " "
+print " Checking for the value of INSTRUME stored in the header."
+print " "
+
+if (s2 == "Sophia")
+    print "Sophia CCD in use."
+else
+    print "**********"
+    print "INSTRUME does not equal Sophia"
+    print "Keyword INSTRUME = " (s2)
+    print "Quitting script!!!"
+    print "**********"
+    print " "
+    end
+
+# If we are here, then the Sophia CCD is in use and we 
+# can proceed with the usual reductions. 
+
 zerocombine ("g*.*",
 output="Zero", combine="median", reject="minmax", ccdtype="zero",
 process=no, delete=no, clobber=no, scale="none", statsec="", nlow=0, nhigh=1,
