@@ -6,13 +6,10 @@ if (defpar ("logver"))
 
 set	home		= (envget("HOME") // "/.iraf/")
 set	imdir		= "home$imdir/"
-set     proj            = "/mnt/nofs/projects/"
-set     data61          = "/mnt/data61/images/"
-set     t61             = "/mnt/nofs/data/t61/"
 set	cache		= "home$cache/"
 set	uparm		= "home$uparm/"
 set     myccddb         = "home$myccddb/"
-set     obsdb           = "myccddb$nofs/obsdb.dat"
+set     obsdb           = "myccddb$aaaa/obsdb.dat"
 set	userid		= envget("USER")
 set     TERM            = "xgterm"
  
