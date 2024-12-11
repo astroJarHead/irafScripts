@@ -3,7 +3,7 @@
 
 # An IRAF CL (command language) script for processing a night
 # of CCD Photon Transfer Curve (PTC) linearity data taken at
-# the 61-inch telescope. Illumination provided by flat-field lamps
+# the ?????? telescope. Illumination provided by flat-field lamps
 # on the dome and these flats and biases are present in the directory.
 
 # REQUIRES:
@@ -26,7 +26,7 @@
 #   CCD images.
 
 # INPUT
-#   1) The images in a single directory in the usual NOFS naming
+#   1) The images in a single directory in the usual ????? naming
 #   convention g??.???.??? are the only input. No argument is passed
 #   as the script looks for filenames with this pattern. 
 
@@ -86,7 +86,7 @@ print "File object.list created.\n"
 # This copies a one-line file in the parent directory
 # so a "column header" is added. I could add this with an
 # editing command, but I like this method. 
-cp -v /mnt/nofs/projects/solarSystemEphem/images/obstype.txt .
+cp -v /mnt/aaaa/projects/solarSystemEphem/images/obstype.txt .
 
 # Becuase of compatibility issues with header keywords
 # as the NOFS headers evolved the OBSTYPE keyword is needed. 
@@ -142,7 +142,7 @@ nclip=0, lsigma=3., usigma=3., binwidth=0.1, format=yes, cache=no,
 print "File raw.signal.imstat.txt created.\n"
 
 # Another column header line copy.
-cp -v /mnt/nofs/projects/solarSystemEphem/images/exptimes.txt .
+cp -v /mnt/aaaa/projects/solarSystemEphem/images/exptimes.txt .
 
 # As you might imagine, exposure times are also needed
 # for the PTC analysis. 
@@ -154,7 +154,7 @@ print "File exptimes.txt created.\n"
 # The UTC time of observation is a useful parameter
 # to extract for the PTC analysis. Date is already
 # coded in the filename. 
-cp -v /mnt/nofs/projects/solarSystemEphem/images/utcobs.txt .
+cp -v /mnt/aaaa/projects/solarSystemEphem/images/utcobs.txt .
 
 hselect ("g??d???.???.fits",
 "UTC-OBS", "yes", missing="INDEF", >> "utcobs.txt")
