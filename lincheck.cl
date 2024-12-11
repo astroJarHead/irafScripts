@@ -11,7 +11,7 @@
 #   to be in the same directory as lincheck.cl
 #     a) These scripts are in the solarSytemEphem/images/ directory
 #     and calling 
-#             "cl> cl < lincheck.cl" 
+#             "cl> cl < ../lincheck.cl" 
 #     from within the individual /g??d??? directories will get the 
 #     process to work. 
 #
@@ -45,11 +45,12 @@
 #	9)  UTC time hh:mm:ss.sss of the esposure start
 #	10) OBSTYPE header keyword (e.g. BIAS, Dome_Flat) 
 
-# At start tell the user the data and time. Report this again
-# at the end so if interested a quick eyeball time estimate of the
+# At start tell the user the date and time. Start time reported again
+# with the endtime so if interested a quick eyeball time estimate of the
 # runtime is available. 
 print "\n"
 date
+date >> startDateTime.txt
 
 # Remind the user of the name of the script ;)
 print "\n"
@@ -67,7 +68,7 @@ else
    ccdred
 
 # Run the ccdlsit task as this is useful to have around
-# even if not needed. THis part requires the CD Database
+# even if not needed. This part requires the CCD Database
 # mentioned above in "preliminaries".
 ccdlist ("g??d???.???.fits", ccdtype = "", names=no,
 long=no,ccdproc="", > "ccdlist.txt")
@@ -88,7 +89,7 @@ print "File object.list created.\n"
 cp -v /mnt/nofs/projects/solarSystemEphem/images/obstype.txt .
 
 # Becuase of compatibility issues with header keywords
-# as the NOFS headers evolved thw OBSTYPE keyword is needed. 
+# as the NOFS headers evolved the OBSTYPE keyword is needed. 
 hselect ("g??d???.???.fits",
 "OBSTYPE", "yes", missing="INDEF", >> "obstype.txt")
 
@@ -172,14 +173,19 @@ print "File utcobs.txt created.\n"
 
 # Miller time. 
 print "\n"
-print "Script lincheck.cl finished\n"
 print "File raw.signal.txt ready for PTC analysis\n"
-print "\n"
 
-# Again pass the system date and time so the eyeball runtime estimate may
+# Print the start date and time to the screen:
+print "This script started at: "
+!more startDateTime.txt
+
+# Print the end time so the eyeball runtime estimate may
 # be made. If you really want a more precise estimate to be made, feel
 # free to improve upon this flawless piece of code :) 
+print "This script ended at: "
 date
+print "\n"
+print "Script lincheck.cl finished. \n"
 
 # End cleanly from the script
 bye
